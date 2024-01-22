@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Practice</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 50px;
+            font-family: sans-serif;
+            color: #fff;
+            background: #000;
+            margin: 20rem;
+            padding: 0;
+            font-weight: 200;
+        }
+
+        #text-animation {
+            color: blue;
+            font-weight: bold;
+        }
+
+        #cursor {
+            color: red;
+            font-weight: 100;
+            font-size: 3rem;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+                height: 3rem;
+            }
+
+            50% {
+                opacity: 0;
+                height: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        Hello World #<br />
+        I Love <span id="text-animation"></span><span id="cursor">|</span>
+    </h1>
+
+    <script>
+        const text = document.getElementById('text-animation');
+
+        const textArray = ['Rust', 'GoLang', 'Java', 'JavaScript', 'Python', 'Elixir'];
+        const typingDelay = 100;
+        const erasingDelay = 100;
+        const newTextDelay = 2000;
+
+        let textArrayIndex = 0;
+        let charIndex = 0;
+
+        function type() {
+            if (charIndex < textArray[textArrayIndex].length) {
+                text.textContent += textArray[textArrayIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, typingDelay);
+            } else {
+                setTimeout(erase, newTextDelay);
+            }
+        }
+
+        function erase() {
+            if (charIndex > 0) {
+                text.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, erasingDelay);
+            } else {
+                textArrayIndex++;
+                if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+                setTimeout(type, typingDelay + 1100);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (textArray.length) setTimeout(type, newTextDelay + 250);
+        });
+    </script>
+
+</body>
+
+</html>
