@@ -1,2 +1,2 @@
-# delta-demo
-This is a demo for git and github demo.
+#Tic Tac Toe Game
+Basic Tic Tac Toe is implemented using javascript
